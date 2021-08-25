@@ -3,6 +3,10 @@
  */
 #include <solana_sdk.h>
 
+typedef struct {
+  uint32_t counter;
+} GreetingAccountData;
+
 uint64_t helloworld(SolParameters *params) {
 
   if (params->ka_num < 1) {
@@ -26,8 +30,10 @@ uint64_t helloworld(SolParameters *params) {
   }
 
   // Increment and store the number of times the account has been greeted
-  uint32_t *num_greets = (uint32_t *)greeted_account->data;
-  *num_greets += 1;
+  // uint32_t *num_greets = (uint32_t *)greeted_account->data;
+  // *num_greets += 1;
+  GreetingAccountData *greetingAccountData = (GreetingAccountData *) greeted_account->data;
+  greetingAccountData->counter++;
 
   sol_log("Hello!");
 
